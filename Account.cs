@@ -54,5 +54,16 @@ namespace TheFuture
             Accounts a = myObjects.FirstOrDefault(p => p.accountNumber == accNo);
             return a;
         }
+        public Accounts Minus(string accNo, double amount)
+        {
+            Accounts a = myObjects.FirstOrDefault(p => p.accountNumber == accNo);
+            if (a.balance >= amount)
+            {
+                a.balance = a.balance-amount;
+            }
+            else { Console.WriteLine($"**"); }
+
+            return a;
+        }
     }
 }

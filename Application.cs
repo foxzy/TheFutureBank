@@ -8,6 +8,7 @@ namespace TheFuture
         Deposit deposit = new Deposit();
         AccountManager aManager = new AccountManager();
         Account account = new Account();
+        Transfermation transfermation = new Transfermation();
 
         void menu()
         {
@@ -29,7 +30,9 @@ namespace TheFuture
                     PrintValues(newAcc);
                     break;
                 case "d":
+                    Console.WriteLine($"Account Id : ");
                     var accId = Console.ReadLine();
+                    Console.WriteLine($"Amount : ");
                     var amount = Console.ReadLine();
 
                     if (aManager.IsValid(accId))
@@ -45,6 +48,26 @@ namespace TheFuture
                     }
                     break;
                 case "t":
+                    Console.WriteLine($"From account id: ");
+                    var transferFrom = Console.ReadLine();
+                    Console.WriteLine($"Amount : ");
+                    var amountToTransfer = Console.ReadLine();
+
+                    Console.WriteLine($"To account id: ");
+                    var transferTo = Console.ReadLine();
+
+                    if (aManager.IsValid(transferFrom) && aManager.IsValid(transferTo))
+                    {
+                        //validate valance of accFrom moreThen amount and reduce money
+                        account.Minus(transferFrom, Double.Parse(amountToTransfer));
+                        account.UpdateBalance(transferTo, Double.Parse(amountToTransfer));
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Don't Account: ");
+                    }
+            
+
                     Console.WriteLine($"Your result:");
                     break;
                 default:
