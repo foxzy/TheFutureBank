@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,7 +14,7 @@ namespace TheFuture
 
     public class Account
     {
-        List<Accounts> myObjects = new List<Accounts>();
+        public List<Accounts> myObject = new List<Accounts>();
 
         public Account()
         {
@@ -26,7 +25,7 @@ namespace TheFuture
                 date = DateTime.Now,
                 balance = 100.00
             };
-            myObjects.Add(a);
+            myObject.Add(a);
 
             Accounts b = new Accounts
             {
@@ -35,7 +34,7 @@ namespace TheFuture
                 date = DateTime.Now,
                 balance = 0.00
             };
-            myObjects.Add(b);
+            myObject.Add(b);
 
             Accounts c = new Accounts
             {
@@ -44,21 +43,21 @@ namespace TheFuture
                 date = DateTime.Now,
                 balance = 0.00
             };
-            myObjects.Add(c);
+            myObject.Add(c);
         }
         public void UpdateBalance(string accNo, double total)
         {
-            var account = myObjects.First(acc => acc.accountNumber == accNo);
+            var account = myObject.First(acc => acc.accountNumber == accNo);
             account.balance += total;
         }
         public Accounts Balance(string accNo)
         {
-            Accounts a = myObjects.FirstOrDefault(p => p.accountNumber == accNo);
+            Accounts a = myObject.FirstOrDefault(p => p.accountNumber == accNo);
             return a;
         }
         public Accounts Reduct(string accNo, double amount)
         {
-            Accounts a = myObjects.FirstOrDefault(p => p.accountNumber == accNo);
+            Accounts a = myObject.FirstOrDefault(p => p.accountNumber == accNo);
             if ((a.balance >= amount) && (amount > 0))
             {
                 a.balance = a.balance - amount;
@@ -70,6 +69,10 @@ namespace TheFuture
             else { Console.WriteLine($"Your account balance is not enought"); }
 
             return a;
+        }
+        public bool IsExists(string accId)
+        {
+            return myObject.Exists(x => x.accountNumber == accId);
         }
     }
 }

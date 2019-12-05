@@ -6,19 +6,22 @@ namespace TheFuture
     public class Application
     {
         Deposit deposit = new Deposit();
-        AccountManager aManager = new AccountManager();
         Account account = new Account();
+        //AccountManager aManager = new AccountManager();
         Transfermation transfermation = new Transfermation();
 
         void menu()
         {
-            Console.WriteLine("The FutureBank");
-            Console.WriteLine("Select Menu\r");
-            Console.WriteLine("------------------------\n");
+            Console.WriteLine("|------------------------\n");
+            Console.WriteLine(" The FutureBank");
+            Console.WriteLine("|------------------------\n");
+            Console.WriteLine(" Select Menu\r");
+            Console.WriteLine("|------------------------\n");
             Console.WriteLine("Press a to List account");
             Console.WriteLine("Press d to Deposit");
             Console.WriteLine("Press t to Transfer money");
             Console.WriteLine("Press x to Exit");
+            Console.WriteLine("|------------------------\n");
         }
 
         void doCommand(string cmd)
@@ -26,8 +29,13 @@ namespace TheFuture
             switch (cmd)
             {
                 case "a":
-                    var newAcc = aManager.Account();
-                    PrintValues(newAcc);
+                    //var newAcc = account.Account();
+                    //PrintValues(account.myObject);
+                    Console.WriteLine();
+                    foreach (Accounts aPart in account.myObject)
+                    {
+                        Console.WriteLine($"Acc No: " + aPart.accountNumber + $"Acc Balance: " + aPart.balance);
+                    }
                     break;
                 case "d":
                     Console.WriteLine($"Account Id : ");
@@ -35,7 +43,7 @@ namespace TheFuture
                     Console.WriteLine($"Amount : ");
                     var amount = Console.ReadLine();
 
-                    if (aManager.IsValid(accId))
+                    if (account.IsExists(accId))
                     {
                         var total = deposit.Total(Double.Parse(amount));
                         //update balance
@@ -56,9 +64,9 @@ namespace TheFuture
                     Console.WriteLine($"To account id: ");
                     var transferTo = Console.ReadLine();
 
-                    if (aManager.IsValid(transferFrom) && aManager.IsValid(transferTo))
+                    if (account.IsExists(transferFrom) && account.IsExists(transferTo))
                     {
-                        //validate valance of accFrom must be amount moreThen reduce money
+                        //validate balance of accFrom must be amount moreThen transferTo acc.
                         account.Reduct(transferFrom, Double.Parse(amountToTransfer));
                         account.UpdateBalance(transferTo, Double.Parse(amountToTransfer));
                     }
