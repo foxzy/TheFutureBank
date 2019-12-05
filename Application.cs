@@ -58,15 +58,15 @@ namespace TheFuture
 
                     if (aManager.IsValid(transferFrom) && aManager.IsValid(transferTo))
                     {
-                        //validate valance of accFrom moreThen amount and reduce money
-                        account.Minus(transferFrom, Double.Parse(amountToTransfer));
+                        //validate valance of accFrom must be amount moreThen reduce money
+                        account.Reduct(transferFrom, Double.Parse(amountToTransfer));
                         account.UpdateBalance(transferTo, Double.Parse(amountToTransfer));
                     }
                     else
                     {
                         Console.WriteLine($"Don't Account: ");
                     }
-            
+
 
                     Console.WriteLine($"Your result:");
                     break;

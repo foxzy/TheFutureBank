@@ -37,12 +37,14 @@ namespace TheFuture
             };
             myObjects.Add(b);
 
-            //a.accountName = "Liza Young";
-            //a.accountNumber = "NL27RABO2187209016";
-            //a.date = DateTime.Now;
-            //a.balance = 0.0;
-            //myObjects.Add(a);
-
+            Accounts c = new Accounts
+            {
+                accountName = "Liza Young",
+                accountNumber = "NL27RABO2187209016",
+                date = DateTime.Now,
+                balance = 0.00
+            };
+            myObjects.Add(c);
         }
         public void UpdateBalance(string accNo, double total)
         {
@@ -54,14 +56,18 @@ namespace TheFuture
             Accounts a = myObjects.FirstOrDefault(p => p.accountNumber == accNo);
             return a;
         }
-        public Accounts Minus(string accNo, double amount)
+        public Accounts Reduct(string accNo, double amount)
         {
             Accounts a = myObjects.FirstOrDefault(p => p.accountNumber == accNo);
-            if (a.balance >= amount)
+            if ((a.balance >= amount) && (amount > 0))
             {
-                a.balance = a.balance-amount;
+                a.balance = a.balance - amount;
             }
-            else { Console.WriteLine($"**"); }
+            else if(amount < 0)
+            {
+                Console.WriteLine($"Amount must be more than 0");
+            }
+            else { Console.WriteLine($"Your account balance is not enought"); }
 
             return a;
         }
