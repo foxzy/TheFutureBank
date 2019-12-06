@@ -45,6 +45,7 @@ namespace TheFuture
             };
             myObject.Add(c);
         }
+
         public void UpdateBalance(string accNo, double total)
         {
             var account = myObject.First(acc => acc.accountNumber == accNo);

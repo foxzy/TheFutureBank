@@ -7,8 +7,7 @@ namespace TheFuture
     {
         Deposit deposit = new Deposit();
         Account account = new Account();
-        //AccountManager aManager = new AccountManager();
-        Transfermation transfermation = new Transfermation();
+        //AccountManager aManager = new AccountManager();    
 
         void menu()
         {
@@ -28,9 +27,7 @@ namespace TheFuture
         {
             switch (cmd)
             {
-                case "a":
-                    //var newAcc = account.Account();
-                    //PrintValues(account.myObject);
+                case "a":           
                     Console.WriteLine();
                     foreach (Accounts aPart in account.myObject)
                     {
@@ -65,8 +62,7 @@ namespace TheFuture
                     var transferTo = Console.ReadLine();
 
                     if (account.IsExists(transferFrom) && account.IsExists(transferTo))
-                    {
-                        //validate balance of accFrom must be amount moreThen transferTo acc.
+                    {                      
                         account.Reduct(transferFrom, Double.Parse(amountToTransfer));
                         account.UpdateBalance(transferTo, Double.Parse(amountToTransfer));
                     }
