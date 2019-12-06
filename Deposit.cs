@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace TheFuture
 {
     public class Deposit

@@ -7,11 +7,9 @@ namespace TheFuture
     {
         Deposit deposit = new Deposit();
         Account account = new Account();
-        //AccountManager aManager = new AccountManager();    
 
         void menu()
         {
-            Console.WriteLine("|------------------------\n");
             Console.WriteLine(" The FutureBank");
             Console.WriteLine("|------------------------\n");
             Console.WriteLine(" Select Menu\r");
@@ -20,7 +18,6 @@ namespace TheFuture
             Console.WriteLine("Press d to Deposit");
             Console.WriteLine("Press t to Transfer money");
             Console.WriteLine("Press x to Exit");
-            Console.WriteLine("|------------------------\n");
         }
 
         void doCommand(string cmd)
@@ -29,9 +26,9 @@ namespace TheFuture
             {
                 case "a":           
                     Console.WriteLine();
-                    foreach (Accounts aPart in account.myObject)
+                    foreach (Accounts aPart in account.accObject)
                     {
-                        Console.WriteLine($"Acc No: " + aPart.accountNumber + $"Acc Balance: " + aPart.balance);
+                        Console.WriteLine($"Acc No: " + aPart.accountNumber + "  " + $"Acc Balance: " + aPart.balance);
                     }
                     break;
                 case "d":
@@ -43,13 +40,13 @@ namespace TheFuture
                     if (account.IsExists(accId))
                     {
                         var total = deposit.Total(Double.Parse(amount));
-                        //update balance
+                        
                         account.UpdateBalance(accId, total);
                         Console.WriteLine($"Balance : " + account.Balance(accId).balance);
                     }
                     else
                     {
-                        Console.WriteLine($"Don't Account: " + accId);
+                        Console.WriteLine($"Invalid account id : " + accId);
                     }
                     break;
                 case "t":
@@ -61,18 +58,12 @@ namespace TheFuture
                     Console.WriteLine($"To account id: ");
                     var transferTo = Console.ReadLine();
 
-                    if (account.IsExists(transferFrom) && account.IsExists(transferTo))
+                    if (account.IsExists(transferFrom) && account.IsExists(transferTo) && (!transferFrom.Equals(transferTo)))
                     {                      
-                        account.Reduct(transferFrom, Double.Parse(amountToTransfer));
+                        account.AdjustBalance(transferFrom, Double.Parse(amountToTransfer));
                         account.UpdateBalance(transferTo, Double.Parse(amountToTransfer));
                     }
-                    else
-                    {
-                        Console.WriteLine($"Don't Account: ");
-                    }
-
-
-                    Console.WriteLine($"Your result:");
+                    Console.WriteLine($"Something went wrong when transfer ");
                     break;
                 default:
                     Console.WriteLine("Invalid command: " + cmd);
@@ -89,13 +80,6 @@ namespace TheFuture
                 doCommand(cmd);
                 menu();
             }
-        }
-
-        void PrintValues(IEnumerable myList)
-        {
-            foreach (Object obj in myList)
-                Console.Write("   {0}", obj);
-            Console.WriteLine();
         }
     }
 }

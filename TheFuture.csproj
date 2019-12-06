@@ -7,5 +7,6 @@
 
   <ItemGroup>
     <Compile Remove="Transfermation.cs" />
+    <Compile Remove="AccountManager.cs" />
   </ItemGroup>
 </Project>

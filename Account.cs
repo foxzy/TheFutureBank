@@ -14,7 +14,7 @@ namespace TheFuture
 
     public class Account
     {
-        public List<Accounts> myObject = new List<Accounts>();
+        public List<Accounts> accObject = new List<Accounts>();
 
         public Account()
         {
@@ -25,7 +25,7 @@ namespace TheFuture
                 date = DateTime.Now,
                 balance = 100.00
             };
-            myObject.Add(a);
+            accObject.Add(a);
 
             Accounts b = new Accounts
             {
@@ -34,7 +34,7 @@ namespace TheFuture
                 date = DateTime.Now,
                 balance = 0.00
             };
-            myObject.Add(b);
+            accObject.Add(b);
 
             Accounts c = new Accounts
             {
@@ -43,22 +43,21 @@ namespace TheFuture
                 date = DateTime.Now,
                 balance = 0.00
             };
-            myObject.Add(c);
+            accObject.Add(c);
         }
 
         public void UpdateBalance(string accNo, double total)
         {
-            var account = myObject.First(acc => acc.accountNumber == accNo);
+            var account = accObject.First(acc => acc.accountNumber == accNo);
             account.balance += total;
         }
         public Accounts Balance(string accNo)
         {
-            Accounts a = myObject.FirstOrDefault(p => p.accountNumber == accNo);
-            return a;
+            return accObject.FirstOrDefault(p => p.accountNumber == accNo);
         }
-        public Accounts Reduct(string accNo, double amount)
+        public Accounts AdjustBalance(string accNo, double amount)
         {
-            Accounts a = myObject.FirstOrDefault(p => p.accountNumber == accNo);
+            Accounts a = accObject.FirstOrDefault(p => p.accountNumber == accNo);
             if ((a.balance >= amount) && (amount > 0))
             {
                 a.balance = a.balance - amount;
@@ -73,7 +72,7 @@ namespace TheFuture
         }
         public bool IsExists(string accId)
         {
-            return myObject.Exists(x => x.accountNumber == accId);
+            return accObject.Exists(x => x.accountNumber == accId);
         }
     }
 }
